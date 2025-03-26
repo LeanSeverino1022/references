@@ -104,3 +104,21 @@ function getStorage(key, fallback = null) {
 setStorage('prefs', { darkMode: true });
 const prefs = getStorage('prefs', { darkMode: false });
 ```
+
+## When to use JSON.parse()
+Must Use JSON.parse() When: You stored data using JSON.stringify() (objects, arrays, numbers, booleans, etc.)
+localStorage only stores strings, so structured data (objects, arrays) must be converted to/from JSON strings.
+
+```javascript
+localStorage.setItem('user', JSON.stringify({ name: 'Alice' }));
+const user = JSON.parse(localStorage.getItem('user')); // { name: 'Alice' }
+```
+
+Can Skip JSON.parse() When: you stored plain strings (no complex data).
+
+```javascript
+localStorage.setItem('name', 'Alice');
+const name = localStorage.getItem('name'); // "Alice" (no parse needed)
+```
+
+
